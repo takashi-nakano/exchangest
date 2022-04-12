@@ -1,6 +1,7 @@
 package com.exchangest.api;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public final class Rate {
     private final BigDecimal ttsRate;
@@ -55,5 +56,27 @@ public final class Rate {
 
     public int getUnit() {
         return unit;
+    }
+
+    @Override
+    public String toString() {
+        return "Rate{" +
+                "ttsRate=" + ttsRate +
+                ", ttbRate=" + ttbRate +
+                ", unit=" + unit +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rate rate = (Rate) o;
+        return getUnit() == rate.getUnit() && Objects.equals(getTtsRate(), rate.getTtsRate()) && Objects.equals(getTtbRate(), rate.getTtbRate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTtsRate(), getTtbRate(), getUnit());
     }
 }
